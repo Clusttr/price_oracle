@@ -19,20 +19,20 @@ pub struct InitAsset<'info> {
     pub system_program: Program<'info, System>
 }
 
-pub fn init_asset(ctx: Context<InitAsset>, price: u64, appreciation_rate: u32, rent: u8) -> Result<()> {
+pub fn init_asset(ctx: Context<InitAsset>, value: u64, appreciation_rate: u16, rent: u32) -> Result<()> {
     ctx.accounts.asset.set_inner(
-        Asset::new(ctx.accounts.asset_mint.key(), price, appreciation_rate, rent)
+        Asset::new(ctx.accounts.asset_mint.key(), value, appreciation_rate, rent)
     );
 
-    let timestamp = Clock::get().unwrap().unix_timestamp;
+    // let timestamp = Clock::get().unwrap().unix_timestamp;
     emit!(InitAssetEvent{
         id: ctx.accounts.asset.key(),
-        price,
+        value,
         appreciation_rate,
         rent,
         cumulative_revenue: 0,
-        total_maintenance_cost: 0,
-        timestamp
+        cumulative_maintenance_cost: 0,
+        // timestamp
     });
     Ok(())
 }

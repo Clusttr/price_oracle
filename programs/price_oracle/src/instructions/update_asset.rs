@@ -16,9 +16,9 @@ pub struct UpdateAsset<'info> {
     pub asset_mint: Account<'info, Mint>
 }
 
-pub fn update_asset(ctx: Context<UpdateAsset>, price: u64, appreciation_rate: u32, rent: u8) -> Result<()> {
+pub fn update_asset(ctx: Context<UpdateAsset>, value: u64, appreciation_rate: u16, rent: u32) -> Result<()> {
     let asset = &mut ctx.accounts.asset;
-    asset.price = price;
+    asset.value = value;
     asset.appreciation_rate = appreciation_rate;
     asset.rent = rent;
 

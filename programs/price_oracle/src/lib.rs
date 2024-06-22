@@ -11,17 +11,17 @@ pub mod price_oracle {
     use super::*;
 
     pub fn init_asset(ctx: Context<InitAsset>,
-                      price: u64,
-                      appreciation_rate: u32,
-                      rent: u8) -> Result<()> {
-        instructions::init_asset(ctx, price, appreciation_rate, rent)
+                      value: u64,
+                      appreciation_rate: u16,
+                      rent: u32) -> Result<()> {
+        instructions::init_asset(ctx, value, appreciation_rate, rent)
     }
 
     pub fn update_asset(ctx: Context<UpdateAsset>,
-                        price: u64,
-                        appreciation_rate: u32,
-                        rent: u8) -> Result<()> {
-        instructions::update_asset(ctx, price, appreciation_rate, rent)
+                        value: u64,
+                        appreciation_rate: u16,
+                        rent: u32) -> Result<()> {
+        instructions::update_asset(ctx, value, appreciation_rate, rent)
     }
 
     pub fn increase_revenue(ctx: Context<IncreaseRevenue>, amount: u64) -> Result<()> {
