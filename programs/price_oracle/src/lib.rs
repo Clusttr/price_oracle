@@ -27,4 +27,8 @@ pub mod price_oracle {
     pub fn increase_revenue(ctx: Context<IncreaseRevenue>, amount: u64) -> Result<()> {
         instructions::increase_revenue(ctx, amount)
     }
+
+    pub fn increase_cost(ctx: Context<IncreaseCost>, amount: u64) -> Result<()> {
+        instructions::increase_cost(ctx, amount)
+    }
 }
