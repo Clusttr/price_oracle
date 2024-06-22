@@ -23,4 +23,8 @@ pub mod price_oracle {
                         rent: u8) -> Result<()> {
         instructions::update_asset(ctx, price, appreciation_rate, rent)
     }
+
+    pub fn increase_revenue(ctx: Context<IncreaseRevenue>, amount: u64) -> Result<()> {
+        instructions::increase_revenue(ctx, amount)
+    }
 }

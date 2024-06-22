@@ -30,6 +30,8 @@ pub fn init_asset(ctx: Context<InitAsset>, price: u64, appreciation_rate: u32, r
         price,
         appreciation_rate,
         rent,
+        cumulative_revenue: 0,
+        total_maintenance_cost: 0,
         timestamp
     });
     Ok(())

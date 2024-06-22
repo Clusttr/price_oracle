@@ -28,6 +28,8 @@ pub fn update_asset(ctx: Context<UpdateAsset>, price: u64, appreciation_rate: u3
         price,
         appreciation_rate,
         rent,
+        cumulative_revenue: asset.cumulative_revenue,
+        total_maintenance_cost: asset.total_maintenance_cost,
         timestamp
     });
     Ok(())
