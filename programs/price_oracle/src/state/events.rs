@@ -7,7 +7,9 @@ pub struct UpdateAssetEvent {
     pub price: u64,
     pub appreciation_rate: u32,
     pub rent: u8,
-    pub timestamp: UnixTimestamp
+    pub cumulative_revenue: u64,
+    pub total_maintenance_cost: u64,
+    pub timestamp: UnixTimestamp,
 }
 
 #[event]
@@ -16,5 +18,7 @@ pub struct InitAssetEvent {
     pub price: u64,
     pub appreciation_rate: u32,
     pub rent: u8,
+    pub cumulative_revenue: u64,
+    pub total_maintenance_cost: u64,
     pub timestamp: UnixTimestamp
 }

@@ -20,12 +20,9 @@ pub struct InitAsset<'info> {
 }
 
 pub fn init_asset(ctx: Context<InitAsset>, price: u64, appreciation_rate: u32, rent: u8) -> Result<()> {
-    ctx.accounts.asset.set_inner(Asset{
-        id: ctx.accounts.asset_mint.key(),
-        price,
-        appreciation_rate,
-        rent,
-    });
+    ctx.accounts.asset.set_inner(
+        Asset::new(ctx.accounts.asset_mint.key(), price, appreciation_rate, rent)
+    );
 
     let timestamp = Clock::get().unwrap().unix_timestamp;
     emit!(InitAssetEvent{
