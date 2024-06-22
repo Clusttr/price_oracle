@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
-use crate::state::Asset;
+use crate::state::{Asset, AssetAccount};
 
 #[derive(Accounts)]
 pub struct IncreaseRevenue<'info> {
@@ -18,5 +18,6 @@ pub struct IncreaseRevenue<'info> {
 
 pub fn increase_revenue(ctx: Context<IncreaseRevenue>, amount: u64) -> Result<()> {
     ctx.accounts.asset.cumulative_revenue += amount;
+    ctx.accounts.asset.emit_update();
     Ok(())
 }

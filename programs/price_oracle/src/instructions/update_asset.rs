@@ -22,15 +22,6 @@ pub fn update_asset(ctx: Context<UpdateAsset>, price: u64, appreciation_rate: u3
     asset.appreciation_rate = appreciation_rate;
     asset.rent = rent;
 
-    let timestamp = Clock::get().unwrap().unix_timestamp;
-    emit!(UpdateAssetEvent{
-        id: asset.id,
-        price,
-        appreciation_rate,
-        rent,
-        cumulative_revenue: asset.cumulative_revenue,
-        total_maintenance_cost: asset.total_maintenance_cost,
-        timestamp
-    });
+    ctx.accounts.asset.emit_update();
     Ok(())
 }
