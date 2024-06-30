@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint};
-use crate::state::{Asset, InitAssetEvent};
+use crate::state::*;
 
 #[derive(Accounts)]
 pub struct InitAsset<'info> {
@@ -24,15 +24,19 @@ pub fn init_asset(ctx: Context<InitAsset>, value: u64, appreciation_rate: u16, r
         Asset::new(ctx.accounts.asset_mint.key(), value, appreciation_rate, rent)
     );
 
-    // let timestamp = Clock::get().unwrap().unix_timestamp;
-    emit!(InitAssetEvent{
+    let block = Clock::get()?.slot;
+    let init_asset_event = InitAssetEvent{
         id: ctx.accounts.asset.key(),
         value,
         appreciation_rate,
         rent,
         cumulative_revenue: 0,
         cumulative_maintenance_cost: 0,
-        // timestamp
-    });
+        block
+    };
+    let init_asset_event_str = init_asset_event.stringify();
+
+    msg!(&init_asset_event_str);
+    emit!(init_asset_event);
     Ok(())
 }

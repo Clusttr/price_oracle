@@ -17,9 +17,9 @@ describe("price_oracle", () => {
   const usdcDecimals = 10 ** 2
 
   it("should asset init!", async () => {
-    let value = new anchor.BN(3000 * usdcDecimals) //$30,000
+    let value = new anchor.BN(30000 * usdcDecimals) //$30,000
     let ar = 10 * usdcDecimals //10%
-    let rent = 10 * usdcDecimals //$1000
+    let rent = 1000 * usdcDecimals //$1000
       console.log({assetValue: value.toNumber()})
     const tx = await program.methods.initAsset(value, ar, rent)
         .accounts({

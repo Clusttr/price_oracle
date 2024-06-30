@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use crate::state::UpdateAssetEvent;
+use crate::state::*;
 
 /// Financial Information on Clusttr's RWAs
 #[account]
@@ -41,15 +41,18 @@ pub trait AssetAccount<'info> {
 
 impl<'info> AssetAccount<'info> for Account<'info, Asset> {
     fn emit_update(&mut self) {
-        // let timestamp = Clock::get().unwrap().unix_timestamp;
-        emit!(UpdateAssetEvent{
+        let block = Clock::get().unwrap().slot;
+        let event = UpdateAssetEvent{
             id: self.id,
             value: self.value,
             appreciation_rate: self.appreciation_rate,
             rent: self.rent,
             cumulative_revenue: self.cumulative_revenue,
             cumulative_maintenance_cost: self.cumulative_maintenance_cost,
-            // timestamp
-        });
+            block
+        };
+        let event_str = event.stringify();
+        msg!(&event_str);
+        emit!(event);
     }
 }
