@@ -1,10 +1,14 @@
-use crate::state::*;
+use std::str::FromStr;
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
+use crate::state::*;
 
 #[derive(Accounts)]
 pub struct UpdateAsset<'info> {
-    #[account(mut)]
+    #[account(
+        mut,
+        address = Pubkey::from_str(constants::ADMIN).unwrap()
+    )]
     pub signer: Signer<'info>,
 
     #[account(
